@@ -1,54 +1,54 @@
 # LIMINAL INSTRUMENTS
 
 > Browser-native sound machines. Zero dependencies. Pure Web Audio API.  
-> Открыл вкладку → играешь.
+> Open a tab → start playing.
 
-[🌐 Live Demo (EN)](https://ВАШ_НИК.github.io/liminal-instruments/) | [🌐 Живая версия (RU)](https://ВАШ_НИК.github.io/liminal-instruments/index-ru.html)
+[🌐 Live Demo (EN)](https://effdst.github.io/LiminalInstruments/) | [🌐 Live Demo (RU)](https://effdst.github.io/LiminalInstruments/index-ru.html)
 
 ---
 
-## 📡 О проекте
+## 📡 About
 
-Коллекция из пяти автономных браузерных инструментов для саунд-дизайна и перформанса. 
-Каждый инструмент — это единственный HTML-файл, который работает локально, без установки, без аккаунтов и без внешних библиотек. 
-Интерфейс спроектирован как аппаратная приборная панель: фиксированный кадр, тактильный отклик, рандомизация по блокам и полная клавиатурная доступность.
+A collection of five standalone browser-based instruments for sound design and live performance. 
+Each instrument is a single, self-contained HTML file that runs locally, without installation, user accounts, or external libraries. 
+The interface is designed as a hardware control panel: fixed frame, tactile response, block-level randomization, and full keyboard accessibility.
 
-## 🎛 Инструменты
+## 🎛 Instruments
 
-| # | Инструмент | Описание | Ссылка |
-|---|------------|----------|--------|
-| 01 | **GRANULA** | Liminal granular workstation. True stereo grain cloud, time freezing, polyphony. | [Open](./Granula.html) |
-| 02 | **NULLROOM Ø** | Liminal ambient workstation. 100 presets, 16×8 sequencer, generative scenes. | [Open](./NullRoom.html) |
-| 03 | **MUTABLE•WEB XL** | Modular synthesizer. 20 modules, CV everywhere, patch cables, generative ambient. | [Open](./MutableWeb.html) |
-| 04 | **OCTA//WEB** | Performance sampler. 16-step knob automation, A/B scenes, morph crossfader. | [Open](./OktaWeb.html) |
-| 05 | **NEUROGRID** | OP–IDM drum & synth machine. 8 voices, polymetric 16×8 sequencer, parameter locks. | [Open](./NeuroGrid.html) |
+| # | Instrument | Description | Link |
+|---|------------|-------------|------|
+| 01 | **GRANULA** | Liminal granular workstation. True stereo grain cloud, time freezing, polyphony, parametric EQ, and WAV rendering. | [Open](./Granula.html) |
+| 02 | **NULLROOM Ø** | Liminal ambient workstation. 100 presets, 16×8 step sequencer, generative scenes, and immersive reverbs (Room, Hall, Shimmer, Space, Cavern). | [Open](./NullRoom.html) |
+| 03 | **MUTABLE•WEB XL** | Modular synthesizer. 20 modules, CV everywhere, patch cables, and generative ambient capabilities (Marbles, Plaits, Rings, Aether, etc.). | [Open](./MutableWeb.html) |
+| 04 | **OCTA//WEB** | Performance sampler. 16-step knob automation, A/B scene morphing crossfader, 8-band parametric EQ, and master compression. | [Open](./OktaWeb.html) |
+| 05 | **NEUROGRID** | OP–IDM drum & synth machine. 8 voices, polymetric 16×8 sequencer, per-step parameter locks, 4 LFOs, and shimmer effects. | [Open](./NeuroGrid.html) |
 
-## ⚙️ Системные требования
+## ⚙️ System Requirements
 
-- **Движок**: Web Audio API
-- **Зависимости**: 0 (Zero)
-- **Установка**: Не требуется (Single File)
-- **Офлайн-режим**: Да (работает с локального диска или флешки)
-- **Экспорт**: WAV (audio), JSON (patches)
-- **Браузеры**: Chrome, Edge, Safari, Firefox (последние версии)
+- **Engine**: Web Audio API
+- **Dependencies**: 0 (Zero)
+- **Installation**: None (Single File)
+- **Offline Mode**: Yes (runs from local disk or USB drive)
+- **Export**: WAV (audio), JSON (patches)
+- **Browsers**: Chrome, Edge, Safari, Firefox (latest versions)
 
-## ⌨️ Глобальное управление (на лендинге)
+## ⌨️ Global Controls (on Landing Page)
 
-- `1` ... `5` : Открыть соответствующий инструмент в новой вкладке
-- `↑` / `↓` : Навигация по рэку
-- `ENTER` : Запустить выбранный инструмент
-- `S` : Включить/выключить фоновый эмбиент-дрон сайта
-- `R` : Выбрать случайный инструмент (⚄)
-- `?` : Открыть руководство оператора
+- `1` ... `5` : Open the corresponding instrument in a new tab
+- `↑` / `↓` : Navigate the rack
+- `ENTER` : Launch the selected instrument
+- `S` : Toggle the site's background ambient drone
+- `R` : Select a random instrument (⚄)
+- `?` : Open the operator's manual
 
-## 📂 Структура репозитория
+## 📂 Repository Structure
 
 ```text
 .
-├── index.html          # Лендинг (English)
-├── index-ru.html       # Лендинг (Русский)
-├── Granula.html        # Гранулярный синтез
-├── NullRoom.html       # Эмбиент и генератив
-├── MutableWeb.html     # Модулярная среда
-├── OktaWeb.html        # Сэмплер и автоматизация
-└── NeuroGrid.html      # Полиметрический секвенсор
+├── index.html          # Landing page (English)
+├── index-ru.html       # Landing page (Russian)
+├── Granula.html        # Granular synthesis workstation
+├── NullRoom.html       # Ambient & generative workstation
+├── MutableWeb.html     # Modular synthesis environment
+├── OktaWeb.html        # Performance sampler & automation
+└── NeuroGrid.html      # Polymetric step sequencer
