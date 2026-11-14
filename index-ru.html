@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>LIMINAL INSTRUMENTS — браузерные звуковые машины</title>
-<meta name="description" content="Браузерные звуковые машины: гранулярная станция, эмбиент-генератор, модуляр с CV, перформанс-сэмплер и IDM-драм-секвенсор.">
+<meta name="description" content="Браузерные звуковые машины: гранулярная станция, эмбиент-генератор, модуляр с CV, перформанс-сэмплер, кик-юнит и IDM-драм-секвенсор.">
 <style>
 :root{
   --bg:#08090b; --panel:#0e1114; --panel2:#0b0e11;
@@ -255,7 +255,7 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
     <div class="lab top">WEB AUDIO API · БЕЗ УСТАНОВКИ · БЕЗ ПЛАГИНОВ · РАБОТАЕТ ОФЛАЙН</div>
     <h1><span class="solid">LIMINAL</span><span class="outline">INSTRUMENTS</span></h1>
     <p class="lead">Браузерные звуковые машины: гранулярная станция, эмбиент-генератор,
-      модульный синтезатор с CV, перформанс-сэмплер и IDM-драм-секвенсор.
+      модульный синтезатор с CV, перформанс-сэмплер, кик-юнит и IDM-драм-секвенсор.
       Звук считается в реальном времени, интерфейс — аппаратная панель.
       Открыл вкладку → играешь.</p>
     <div class="hero-cta">
@@ -301,6 +301,7 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
       <button class="chip" data-f="ambient">ЭМБИЕНТ</button>
       <button class="chip" data-f="modular">МОДУЛЯР</button>
       <button class="chip" data-f="sampler">СЭМПЛЕР</button>
+      <button class="chip" data-f="kick">KICK</button>
       <button class="chip" data-f="drum">DRUM / IDM</button>
     </div>
     <div class="rack" id="rackList"></div>
@@ -370,7 +371,7 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
 
 <footer class="foot">
   <i class="led on"></i><span>ОНЛАЙН</span><span class="sep"></span>
-  <span>1–5 ОТКРЫТЬ · ↑↓ ВЫБОР · ⏎ ЗАПУСК · S ЗВУК · ? СПРАВКА</span>
+  <span>1–6 ОТКРЫТЬ · ↑↓ ВЫБОР · ⏎ ЗАПУСК · S ЗВУК · ? СПРАВКА</span>
   <span class="sep"></span><span id="log">система готова</span>
   <span style="margin-left:auto">LIMINAL INSTRUMENTS · v1.0</span>
 </footer>
@@ -382,7 +383,7 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
     и работает автономно. Звук сайта выключен по умолчанию: кнопка ЗВУК включает тихий
     генеративный дрон, а монитор сверху начинает показывать реальный спектр.</p>
   <div class="kbd">
-    <b>1 … 5</b><span>открыть юнит по номеру</span>
+    <b>1 … 6</b><span>открыть юнит по номеру</span>
     <b>↑ / ↓</b><span>выбор юнита в рэке</span>
     <b>ENTER</b><span>запустить выбранный</span>
     <b>I</b><span>спецификация выбранного юнита</span>
@@ -444,7 +445,20 @@ const INSTRUMENTS = [
             'SCENE A/B crossfader · morph engine · TRK LEN 16'],
   keys:'↑/↓ morph scenes · drag knob · Shift = fine · dbl click = reset' },
 
-{ n:'05', name:'NEUROGRID', ver:'dark edition', sub:'op–idm · drum & synthesizer machine',
+{ n:'05', name:'KICKFORGE', ver:'MK-XI', sub:'kick performance unit',
+  href:'KickForge.html', acc:'#ff6b6b', viz:'kick', f:['kick','drum'],
+  tags:['KICK','ПЕРФОРМАНС','РЕНДЕР'],
+  desc:'Кик-перформанс юнит: BPM-синхронизированный луп, лимитер, рандомные паттерны и офлайн-рендер в WAV.',
+  specs:[['BPM','128'],['LIMITER','GR 0.0 dB'],['PRESETS','100'],['RENDER','16-BIT / 44.1 kHz']],
+  features:['BPM control: 72–200 с tap tempo',
+            'Limiter с индикатором gain reduction',
+            '⚄ RANDOM всех параметров',
+            'SAVE / LOAD проекта в JSON',
+            'BANK · 100 пресетов',
+            'OFFLINE RENDER: точная копия экспорта, 16-bit / 44.1 kHz'],
+  keys:'SPACE play · L loop · R random · M mute · E export · ←→ preset' },
+
+{ n:'06', name:'NEUROGRID', ver:'dark edition', sub:'op–idm · drum & synthesizer machine',
   href:'NeuroGrid.html', acc:'#ff6b6b', viz:'poly', f:['drum'],
   tags:['IDM','DRUM','POLYMETRIC'],
   desc:'Восемь голосов, полиметрический секвенсор 16×8, parameter locks на шаг и четыре LFO.',
@@ -519,7 +533,7 @@ document.getElementById('rndBtn').addEventListener('click',randomUnit);
 addEventListener('keydown',e=>{
   if(e.target.matches('input,textarea'))return;
   const k=e.key;
-  if(k>='1'&&k<='5'){launch(+k-1);return;}
+  if(k>='1'&&k<='6'){launch(+k-1);return;}
   if(k==='ArrowDown'){e.preventDefault();move(1);}
   else if(k==='ArrowUp'){e.preventDefault();move(-1);}
   else if(k==='Enter'){launch(selected);}
@@ -800,6 +814,22 @@ const DRAW={
     v.pat.forEach((p,i)=>{const x=4+i*bw+bw/2,y=8+(1-p)*h*.22;i?c.lineTo(x,y):c.moveTo(x,y);});
     c.stroke(); c.globalAlpha=1;
   },
+  kick(v,t,dt,k){
+    const{ctx:c,w,h}=v; c.clearRect(0,0,w,h); c.fillStyle='#07090b'; c.fillRect(0,0,w,h);
+    grid(c,w,h,32,v.col,.04);
+    const cx=w/2, cy=h/2;
+    const beat=Math.floor(t*4)%4;
+    for(let i=0;i<4;i++){
+      const x=cx-60+i*40;
+      const active=i===beat;
+      c.fillStyle=v.col;
+      c.globalAlpha=active?.9:.2;
+      c.beginPath();
+      c.arc(x,cy,8+active*4,0,Math.PI*2);
+      c.fill();
+    }
+    c.globalAlpha=1;
+  },
   poly(v,t,dt,k){
     const{ctx:c,w,h}=v; c.clearRect(0,0,w,h); c.fillStyle='#07090b'; c.fillRect(0,0,w,h);
     const cx=w/2,cy=h/2,R=Math.min(w,h)*.92;
@@ -837,7 +867,8 @@ setInterval(()=>{clock.textContent=new Date().toLocaleTimeString('ru-RU',{timeZo
 const LOGS=['система готова','юниты загружены · web audio','без установки · работает офлайн',
   'granula · true stereo grain cloud','nullroom ø · 100 пресетов загружено',
   'mutable•web xl · 20 модулей · cv везде','octa//web · 16-шаговая автоматизация наготове',
-  'neurogrid · 8 голосов · полиметр 16×8','нажми S для эмбиент-дрона'];
+  'kickforge · кик-перформанс юнит','neurogrid · 8 голосов · полиметр 16×8',
+  'нажми S для эмбиент-дрона'];
 let li=0; const logEl=document.getElementById('log');
 function log(s){logEl.textContent=s;li=-1;}
 setInterval(()=>{li=(li+1)%LOGS.length;logEl.style.opacity=0;
