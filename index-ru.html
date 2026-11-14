@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>LIMINAL INSTRUMENTS — браузерные звуковые машины</title>
-<meta name="description" content="Пять браузерных инструментов на Web Audio: гранулярная станция, эмбиент-генератор, модуляр с CV, перформанс-сэмплер и IDM-драм-секвенсор.">
+<meta name="description" content="Браузерные звуковые машины: гранулярная станция, эмбиент-генератор, модуляр с CV, перформанс-сэмплер и IDM-драм-секвенсор.">
 <style>
 :root{
   --bg:#08090b; --panel:#0e1114; --panel2:#0b0e11;
@@ -75,29 +75,86 @@ ul{margin:0;padding:0;list-style:none}
 .meter b{color:var(--txt);font-weight:500}
 
 main{padding-top:var(--bar);padding-bottom:calc(var(--foot) + 20px)}
-.hero{padding:58px 0 34px;border-bottom:1px solid var(--line)}
-.hero h1{font-size:clamp(36px,7.6vw,104px);line-height:.9;letter-spacing:-.015em;margin:16px 0 0}
-.hero h1 .ghost{color:transparent;-webkit-text-stroke:1px var(--line2);text-stroke:1px var(--line2)}
-.lead{max-width:640px;color:#9aa5b0;margin:20px 0 0;font-size:13px}
-.hero-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.hero-meta{display:flex;flex-wrap:wrap;gap:18px;margin-top:24px;padding-top:16px;border-top:1px solid var(--line)}
+
+.hero{padding:80px 0 50px;border-bottom:1px solid var(--line);text-align:center}
+.hero .lab.top{margin-bottom:32px}
+.hero h1{
+  font-size:clamp(48px,11vw,160px);
+  line-height:.85;
+  letter-spacing:-.02em;
+  margin:0;
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:.08em;
+  flex-wrap:wrap;
+}
+.hero h1 .solid{
+  color:#e4e9ee;
+  font-weight:700;
+  letter-spacing:-.03em;
+}
+.hero h1 .outline{
+  color:transparent;
+  -webkit-text-stroke:1.5px var(--line2);
+  text-stroke:1.5px var(--line2);
+  font-weight:700;
+  letter-spacing:-.03em;
+}
+.lead{
+  max-width:640px;
+  color:#9aa5b0;
+  margin:32px auto 0;
+  font-size:13px;
+  text-align:center;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px;justify-content:center}
+.hero-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:24px;
+  margin-top:32px;
+  padding-top:20px;
+  border-top:1px solid var(--line);
+  justify-content:center;
+}
 .hero-meta div{display:flex;gap:8px;align-items:center}
 
-.monitor{margin-top:30px;padding:0;overflow:hidden}
-.mon-head{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--line);background:#0a0d10}
+.monitor{
+  margin:40px auto 0;
+  max-width:1100px;
+  padding:0;
+  overflow:hidden;
+}
+.mon-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 12px;
+  border-bottom:1px solid var(--line);
+  background:#0a0d10;
+}
 .mon-head .seg{display:flex;gap:0;margin-left:auto}
 .seg button{font:inherit;font-size:9px;letter-spacing:.18em;color:var(--dim);background:none;border:1px solid var(--line);padding:4px 8px;cursor:pointer}
 .seg button+button{border-left:0}
 .seg button.on{color:#07080a;background:var(--acc);border-color:var(--acc)}
-#heroViz{display:block;width:100%;height:230px}
-.mon-foot{display:flex;gap:16px;padding:6px 12px;border-top:1px solid var(--line);background:#0a0d10;flex-wrap:wrap}
+#heroViz{display:block;width:100%;height:260px}
+.mon-foot{
+  display:flex;
+  gap:16px;
+  padding:6px 12px;
+  border-top:1px solid var(--line);
+  background:#0a0d10;
+  flex-wrap:wrap;
+  justify-content:center;
+}
 
 section{padding:46px 0;border-bottom:1px solid var(--line)}
 .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
 .sec-head .num{font-size:10px;color:var(--acc);letter-spacing:.2em}
 .sec-head h2{font-size:15px;letter-spacing:.26em}
 .sec-head .rule{flex:1;height:1px;background:var(--line)}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;justify-content:center}
 .chip{font:inherit;font-size:9px;letter-spacing:.2em;color:var(--dim);background:none;border:1px solid var(--line);padding:5px 10px;cursor:pointer}
 .chip:hover{color:var(--txt);border-color:var(--line2)}
 .chip.on{color:#07080a;background:var(--txt);border-color:var(--txt)}
@@ -156,13 +213,6 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
 .kbd{display:grid;grid-template-columns:120px 1fr;gap:6px 14px;margin-top:14px;font-size:11px}
 .kbd b{font-weight:500;color:var(--acc);letter-spacing:.1em}
 .kbd span{color:#8e99a4}
-#boot{position:fixed;inset:0;z-index:9500;background:#06070a;display:grid;place-items:center;cursor:pointer;transition:opacity .6s}
-#boot.off{opacity:0;pointer-events:none}
-.boot-in{text-align:center}
-.boot-in .pw{font-size:44px;color:var(--acc);animation:pulse 2.4s infinite}
-@keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
-.boot-in h2{font-size:clamp(24px,5vw,54px);letter-spacing:.2em;margin:14px 0 6px}
-.boot-in .enter{margin-top:26px;font-size:10px;letter-spacing:.34em;color:var(--dim);animation:pulse 3s infinite}
 
 @media(max-width:1180px){
   .unit{grid-template-columns:48px 170px minmax(0,1fr) 118px}
@@ -176,20 +226,14 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
   .unit{grid-template-columns:44px minmax(0,1fr);row-gap:12px}
   .u-viz{grid-column:1/-1;width:100%;height:74px}
   .u-act{grid-column:1/-1;flex-direction:row}
-  #heroViz{height:170px}
+  #heroViz{height:200px}
+  .hero h1{flex-direction:column;gap:0}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="grain"></div><div class="scan"></div><div class="vig"></div>
-
-<div id="boot"><div class="boot-in">
-  <div class="pw">⏻</div>
-  <h2>LIMINAL</h2>
-  <div class="lab">инструменты · web audio · браузерные машины</div>
-  <div class="enter">НАЖМИТЕ В ЛЮБОМ МЕСТЕ, ЧТОБЫ ВОЙТИ</div>
-</div></div>
 
 <header class="bar">
   <div class="brand"><b>LIMINAL</b><span>INSTRUMENTS</span></div>
@@ -206,13 +250,13 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
 </header>
 
 <main>
-<section class="hero" style="border-top:0">
+<section class="hero">
   <div class="wrap">
-    <div class="lab">WEB AUDIO API · БЕЗ УСТАНОВКИ · БЕЗ ПЛАГИНОВ · РАБОТАЕТ ОФЛАЙН</div>
-    <h1>LIMINAL<br><span class="ghost">INSTRUMENTS</span></h1>
-    <p class="lead">Браузерные звуковые машины: гранулярная станция, эмбиент-генератор, 
-      модульный синтезатор с CV, перформанс-сэмплер и IDM-драм-секвенсор. 
-      Звук считается в реальном времени, интерфейс — приборная панель. 
+    <div class="lab top">WEB AUDIO API · БЕЗ УСТАНОВКИ · БЕЗ ПЛАГИНОВ · РАБОТАЕТ ОФЛАЙН</div>
+    <h1><span class="solid">LIMINAL</span><span class="outline">INSTRUMENTS</span></h1>
+    <p class="lead">Браузерные звуковые машины: гранулярная станция, эмбиент-генератор,
+      модульный синтезатор с CV, перформанс-сэмплер и IDM-драм-секвенсор.
+      Звук считается в реальном времени, интерфейс — аппаратная панель.
       Открыл вкладку → играешь.</p>
     <div class="hero-cta">
       <a class="btn primary" href="#rack">▼ ОТКРЫТЬ РЭК</a>
@@ -229,7 +273,7 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
     <div class="panel monitor" style="--acc:var(--cy)">
       <div class="mon-head">
         <i class="led on"></i><span class="lab">полевой монитор</span>
-        <span class="lab" id="monState">синтетика · звук выкл</span>
+        <span class="lab" id="monState">synthetic · idle</span>
         <div class="seg" id="monSeg">
           <button data-m="spectrum" class="on">СПЕКТР</button>
           <button data-m="wave">ВОЛНА</button>
@@ -238,8 +282,11 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
       </div>
       <canvas id="heroViz" data-viz="hero" data-color="#7fe6ff"></canvas>
       <div class="mon-foot">
-        <span class="lab">out l / r</span><span class="lab">corr 0.00</span>
-        <span class="lab" id="srLab">sample rate —</span><span class="lab">engine web audio</span>
+        <span class="lab">выход l / r</span>
+        <span class="lab">корр <b id="corrVal">0.00</b></span>
+        <span class="lab" id="srLab">частота дискретизации —</span>
+        <span class="lab">движок web audio</span>
+        <span class="lab">режим <b id="modeVal">SYNTH</b></span>
       </div>
     </div>
   </div>
@@ -266,17 +313,17 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
     <div class="cols">
       <div class="panel card" style="--acc:var(--cy)">
         <h3>01 · БРАУЗЕР КАК СТУДИЯ</h3>
-        <p>Ни установок, ни VST, ни аккаунтов. Каждый инструмент — один HTML-файл 
+        <p>Ни установок, ни VST, ни аккаунтов. Каждый инструмент — один HTML-файл
           на Web Audio API. Работает локально, с флешки, с телефона, в самолёте.</p>
       </div>
       <div class="panel card" style="--acc:var(--vi)">
         <h3>02 · ПРИБОР, НЕ ПЛАГИН</h3>
-        <p>Фиксированный кадр, ручки с драгом и Shift-точностью, parameter locks, 
+        <p>Фиксированный кадр, ручки с драгом и Shift-точностью, parameter locks,
           сцены, ⚄-рандом по блокам. Интерфейс ведёт себя как железо, а не как форма.</p>
       </div>
       <div class="panel card" style="--acc:var(--gr)">
         <h3>03 · ЗАПИСЬ И ОБМЕН</h3>
-        <p>Рендер в WAV, патчи в JSON, банки в localStorage. Сессию можно сохранить, 
+        <p>Рендер в WAV, патчи в JSON, банки в localStorage. Сессию можно сохранить,
           передать другому человеку ссылкой — и он услышит то же самое.</p>
       </div>
     </div>
@@ -331,8 +378,8 @@ section{padding:46px 0;border-bottom:1px solid var(--line)}
 <div class="modal" id="help"><div class="panel box" style="--acc:var(--acc)">
   <button class="btn x" id="helpX">✕</button>
   <h3>РУКОВОДСТВО ОПЕРАТОРА</h3>
-  <p style="color:#8e99a4;font-size:12px">Сайт — это рэк. Каждый юнит открывается в новой вкладке 
-    и работает автономно. Звук сайта выключен по умолчанию: кнопка ЗВУК включает тихий 
+  <p style="color:#8e99a4;font-size:12px">Сайт — это рэк. Каждый юнит открывается в новой вкладке
+    и работает автономно. Звук сайта выключен по умолчанию: кнопка ЗВУК включает тихий
     генеративный дрон, а монитор сверху начинает показывать реальный спектр.</p>
   <div class="kbd">
     <b>1 … 5</b><span>открыть юнит по номеру</span>
@@ -520,7 +567,7 @@ function initAudio(){
   const bp=AC.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=1400; bp.Q.value=.6;
   const ng=AC.createGain(); ng.gain.value=.03;
   ns.connect(bp); bp.connect(ng); ng.connect(verb); ns.start();
-  document.getElementById('srLab').textContent='sample rate '+(AC.sampleRate/1000).toFixed(1)+' kHz';
+  document.getElementById('srLab').textContent='частота дискретизации '+(AC.sampleRate/1000).toFixed(1)+' kHz';
 }
 function toggleSound(){
   if(!AC)initAudio();
@@ -531,7 +578,8 @@ function toggleSound(){
   const b=document.getElementById('snd');
   b.classList.toggle('on',soundOn);
   b.innerHTML='<i class="led'+(soundOn?' on':'')+'" id="sndLed"></i>ЗВУК: '+(soundOn?'ВКЛ':'ВЫКЛ');
-  document.getElementById('monState').textContent=soundOn?'live · analyser':'синтетика · звук выкл';
+  document.getElementById('monState').textContent=soundOn?'live · анализатор':'synthetic · idle';
+  document.getElementById('modeVal').textContent=soundOn?'LIVE':'SYNTH';
   log(soundOn?'аудиодвижок онлайн · дрон':'аудиодвижок заглушен');
 }
 document.getElementById('snd').onclick=toggleSound;
@@ -609,9 +657,66 @@ function grid(c,w,h,step,col,a){
   for(let y=0;y<h;y+=step){c.moveTo(0,y+.5);c.lineTo(w,y+.5);}
   c.stroke(); c.globalAlpha=1;
 }
+
+function drawSyntheticIdle(v,t){
+  const{ctx:c,w,h}=v;
+  c.clearRect(0,0,w,h);
+  c.fillStyle='#07090b';
+  c.fillRect(0,0,w,h);
+  grid(c,w,h,32,v.col,.04);
+  const cx=w/2, cy=h/2;
+  const pulse=Math.sin(t*2)*.5+.5;
+  c.strokeStyle=v.col;
+  c.globalAlpha=.15+pulse*.1;
+  c.lineWidth=1;
+  c.beginPath();
+  c.arc(cx,cy,40+pulse*20,0,Math.PI*2);
+  c.stroke();
+  for(let i=0;i<8;i++){
+    const angle=t*.5+i*(Math.PI/4);
+    const r=60+Math.sin(t+i)*10;
+    const x=cx+Math.cos(angle)*r;
+    const y=cy+Math.sin(angle)*r;
+    c.globalAlpha=.3+Math.sin(t*2+i)*.2;
+    c.fillStyle=v.col;
+    c.beginPath();
+    c.arc(x,y,2,0,Math.PI*2);
+    c.fill();
+  }
+  const scanY=(t*30)%h;
+  c.strokeStyle=v.col;
+  c.globalAlpha=.08;
+  c.lineWidth=1;
+  c.beginPath();
+  c.moveTo(0,scanY);
+  c.lineTo(w,scanY);
+  c.stroke();
+  const bs=20;
+  c.strokeStyle=v.col;
+  c.globalAlpha=.25;
+  c.lineWidth=1;
+  c.beginPath();
+  c.moveTo(10,10+bs);c.lineTo(10,10);c.lineTo(10+bs,10);
+  c.moveTo(w-10-bs,10);c.lineTo(w-10,10);c.lineTo(w-10,10+bs);
+  c.moveTo(10,h-10-bs);c.lineTo(10,h-10);c.lineTo(10+bs,h-10);
+  c.moveTo(w-10-bs,h-10);c.lineTo(w-10,h-10);c.lineTo(w-10,h-10-bs);
+  c.stroke();
+  c.globalAlpha=.4;
+  c.fillStyle=v.col;
+  c.font='9px monospace';
+  c.fillText('SYNTHETIC IDLE',14,h-14);
+  c.fillText('NO SIGNAL',w-80,h-14);
+  c.globalAlpha=1;
+}
+
 const DRAW={
   hero(v,t){
-    const{ctx:c,w,h}=v; c.clearRect(0,0,w,h);
+    const{ctx:c,w,h}=v;
+    if(!soundOn){
+      drawSyntheticIdle(v,t);
+      return;
+    }
+    c.clearRect(0,0,w,h);
     c.fillStyle='#07090b'; c.fillRect(0,0,w,h);
     grid(c,w,h,32,v.col,.05);
     if(v.mode==='grid'){
@@ -739,10 +844,7 @@ setInterval(()=>{li=(li+1)%LOGS.length;logEl.style.opacity=0;
   setTimeout(()=>{logEl.textContent=LOGS[li];logEl.style.opacity=1;},220);},4200);
 logEl.style.transition='opacity .2s';
 
-const boot=document.getElementById('boot');
-function enter(){boot.classList.add('off');start();setTimeout(()=>boot.remove(),700);}
-boot.addEventListener('click',enter);
-addEventListener('keydown',function once(e){if(!boot.classList.contains('off')){enter();removeEventListener('keydown',once);}});
+start();
 sel(0,false);
 </script>
 </body>
